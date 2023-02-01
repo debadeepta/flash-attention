@@ -4,6 +4,7 @@ current_dir = Path(__file__).parent.absolute()
 
 
 import pytest
+import argparse
 
 import torch
 
@@ -216,3 +217,30 @@ class TestLMDataModule:
             assert x.shape == (batch_size, max_length)
             assert x.dtype == torch.long
             assert torch.allclose(x[:, 1:], y[:, :-1])
+
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(prog="ProcessDatasets",
+                                     description="Preprocesses language modeling datasets")
+
+    parser.add_argument('-d', '--datasetname', type=str, help="wikitext2,wikitext,wikitext103,openwebtext,lambada,the_pile,pg19")
+    args = parser.parse_args()
+
+    testlmdatamodule = TestLMDataModule()
+
+    if args.datasetname == "wikitext2":
+        testlmdatamodule.test_wikitext2()
+    elif args.datasetname == "wikitext103":
+        testlmdatamodule.test_wikitext103()
+    elif args.datasetname == "openwebtext":
+        testlmdatamodule.test_openwebtext()
+    elif args.datasetname == "lambada":
+        testlmdatamodule.test_lambada()
+    elif args.datasetname == "the_pile":
+        testlmdatamodule.test_the_pile()
+    elif args.datasetname == "pg19":
+        testlmdatamodule.test_pg19()
+    else:
+        raise NotImplementedError("f{args.datasetname} is not implemented")
+

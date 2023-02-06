@@ -9,8 +9,8 @@ from torch.distributed.optim import ZeroRedundancyOptimizer
 
 from pytorch_lightning.strategies.ddp import DDPStrategy
 from pytorch_lightning.core.optimizer import LightningOptimizer
-from pytorch_lightning.utilities.types import _PATH
-# from lightning_lite.utilities.types import _PATH
+# from pytorch_lightning.utilities.types import _PATH
+from lightning_lite.utilities.types import _PATH
 
 
 # Copied from Pytorch's ZeroRedundancyOptimizer's state_dict method, but we only get
